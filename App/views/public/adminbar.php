@@ -9,7 +9,7 @@
 <style>
 .win{
     width: 150px;
-    margin-left: 15px;
+    margin-left: 10px;
 }
 </style>
 <body class="bg-gray-100">
@@ -46,7 +46,7 @@
     <!-- Sidebar -->
     <div 
       id="sidebar" 
-      class="bg-blue-700 text-white w-64 md:flex flex-col p-4 space-y-6 hidden md:block"
+      class="bg-blue-700 text-white w-74 md:flex flex-col p-8 space-y-8 hidden md:block"
     >
       <!-- Logo Section -->
       <div class="flex items-center space-x-3">
@@ -58,7 +58,10 @@
       <nav>
         <ul class="space-y-4">
           <li>
-            <a href="#" class="block py-2 px-4 rounded-md hover:bg-blue-500">Home</a>
+            <a href="../admin/index.php" class="block py-2 px-4 rounded-md hover:bg-blue-500">Home</a>
+          </li>
+          
+            <a href="../admin/program.php" class="block py-2 px-4 rounded-md hover:bg-blue-500">Programs</a>
           </li>
           <li>
             <a href="../admin/category.php" class="block py-2 px-4 rounded-md hover:bg-blue-500">Category</a>
@@ -67,7 +70,13 @@
             <a href="../admin/participants.php" class="block py-2 px-4 rounded-md hover:bg-blue-500">participants</a>
           </li>
           <li>
-            <a href="#" class="block py-2 px-4 rounded-md hover:bg-blue-500">Contact</a>
+            <a href="../admin/feedback.php" class="block py-2 px-4 rounded-md hover:bg-blue-500">feedback</a>
+          </li>
+          <li>
+            <a href="../admin/reports.php" class="block py-2 px-4 rounded-md hover:bg-blue-500">report</a>
+          </li>
+          <li>
+            <a href="../admin/logout.php" class="block py-2 px-4 rounded-md hover:bg-blue-500">Logout</a>
           </li>
         </ul>
       </nav>

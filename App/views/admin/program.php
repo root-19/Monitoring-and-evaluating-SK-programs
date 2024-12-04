@@ -7,7 +7,7 @@ $db = new Database();
 $pdo = $db->getConnection();
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['create_participant'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['create_program'])) {
     // Get POST data
     $name = $_POST['name'];
     $program = $_POST['program'];
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['create_participant']))
     }
 
     // Insert the new participant into the database
-    $sql = "INSERT INTO participants (name, program, status, date) VALUES (:name, :program, :status, :date)";
+    $sql = "INSERT INTO programs (name, program, status, date) VALUES (:name, :program, :status, :date)";
     $stmt = $pdo->prepare($sql);
 
     // Bind the parameters
@@ -44,11 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['create_participant']))
 
 try {
     // Fetch participants
-    $stmt = $pdo->query("SELECT * FROM participants ORDER BY date DESC");
-    $participants = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $pdo->query("SELECT * FROM  programs ORDER BY date DESC");
+    $programs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     echo "Error fetching participants: " . $e->getMessage();
-    $participants = []; // Ensure $participants is defined even if an error occurs
+    $programs = []; // Ensure $participants is defined even if an error occurs
 }
 
 // Handle deletion request
@@ -56,7 +56,7 @@ if (isset($_GET['delete_id'])) {
     $deleteId = $_GET['delete_id'];
 
     // Prepare the DELETE query
-    $sql = "DELETE FROM participants WHERE id = :id";
+    $sql = "DELETE FROM programs WHERE id = :id";
     $stmt = $pdo->prepare($sql);
 
     // Bind the participant ID to the query
@@ -65,7 +65,7 @@ if (isset($_GET['delete_id'])) {
     // Execute the deletion query
     if ($stmt->execute()) {
         // Redirect to the same page after successful deletion
-        header("Location: participants.php");
+        header("Location: program.php");
         exit();
     } else {
         // If there's an error, display a message
@@ -74,7 +74,7 @@ if (isset($_GET['delete_id'])) {
 }
 ?>
 
-<!-- Your form remains the same as before -->
+
 
 
 <!DOCTYPE html>
@@ -86,31 +86,6 @@ if (isset($_GET['delete_id'])) {
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
-<header class="bg-blue-700 text-white shadow-md">
-    <div class="container mx-auto flex items-center justify-between px-4 py-4">
-        <!-- Logo and Title -->
-        <div class="flex items-center space-x-4">
-            <!-- <img src="../../assets/image/sks.png" alt="Logo" class="w-12 h-13 object-cover rounded"> -->
-            <h1 class="text-2xl font-bold">Sangguniang Kabataan Dinagat Islands</h1>
-        </div>
-        
-        <!-- Navigation -->
-        <nav>
-            <ul class="flex space-x-4 text-sm font-medium">
-                <!-- <li><a href="#" class="hover:text-gray-200">Home</a></li>
-                <li><a href="#" class="hover:text-gray-200">Categories</a></li>
-                <li><a href="#" class="hover:text-gray-200">Participants</a></li>
-                <li> -->
-    <!-- <a href="signin.php" 
-       class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-       Login
-    </a> -->
-</li>
-
-            </ul>
-        </nav>
-    </div>
-</header>
 <?php include "../public/adminbar.php"; ?>
 
 
@@ -119,7 +94,7 @@ if (isset($_GET['delete_id'])) {
     <div class="container mx-auto p-4">
         <h1 class="text-3xl font-bold mb-6">Create New Participant</h1>
         
-        <form action="participants.php" method="POST" class="bg-white p-6 rounded-lg shadow-md">
+        <form action="program.php" method="POST" class="bg-white p-6 rounded-lg shadow-md">
             <div class="mb-4">
                 <label for="name" class="block text-sm font-semibold text-gray-700">Participant Name</label>
                 <input type="text" id="name" name="name" required class="w-full p-2 border border-gray-300 rounded-md">
@@ -147,7 +122,7 @@ if (isset($_GET['delete_id'])) {
                 <input type="date" id="date" name="date" required class="w-full p-2 border border-gray-300 rounded-md">
             </div>
             
-            <button type="submit" name="create_participant" class="w-full p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+            <button type="submit" name="create_program" class="w-full p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
                 Create Participant
             </button>
         </form>
@@ -168,25 +143,26 @@ if (isset($_GET['delete_id'])) {
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($participants as $participant): ?>
+            <?php foreach ($programs as $program): ?>
                 <tr class="border-b">
-                    <td class="p-3"><?php echo htmlspecialchars($participant['name']); ?></td>
-                    <td class="p-3"><?php echo htmlspecialchars($participant['program']); ?></td>
+                    <td class="p-3"><?php echo htmlspecialchars($program['name']); ?></td>
+                    <td class="p-3"><?php echo htmlspecialchars($program['program']); ?></td>
                     <td class="p-3">
-                        <form method="POST" action="../../model/update_participants.php" class="flex items-center">
-                            <input type="hidden" name="participant_id" value="<?php echo $participant['id']; ?>">
+                        <form method="POST" action="../../model/update_program.php" class="flex items-center">
+                            <input type="hidden" name="participant_id" value="<?php echo $program['id']; ?>">
                             <select name="status" class="border rounded px-2 py-1" onchange="this.form.submit()">
-                                <option value="active" <?php echo $participant['status'] === 'active' ? 'selected' : ''; ?>>Active</option>
-                                <option value="ongoing" <?php echo $participant['status'] === 'ongoing' ? 'selected' : ''; ?>>Ongoing</option>
-                                <option value="inactive" <?php echo $participant['status'] === 'inactive' ? 'selected' : ''; ?>>Inactive</option>
-                                <option value="completed" <?php echo $participant['status'] === 'completed' ? 'selected' : ''; ?>>Completed</option>
+                                <option value="active" <?php echo $program['status'] === 'active' ? 'selected' : ''; ?>>Active</option>
+                                <option value="ongoing" <?php echo $program['status'] === 'ongoing' ? 'selected' : ''; ?>>Ongoing</option>
+                                <option value="inactive" <?php echo$program['status'] === 'inactive' ? 'selected' : ''; ?>>Inactive</option>
+                                <option value="completed" <?php echo $program['status'] === 'completed' ? 'selected' : ''; ?>>Completed</option>
                             </select>
                         </form>
                     </td>
-                    <td class="p-3"><?php echo date('F j, Y', strtotime($participant['date'])); ?></td>
+                    <td class="p-3"><?php echo date('F j, Y', strtotime($program['date'])); ?></td>
                     <td class="p-3">
                         <!-- Optional: Add buttons for additional actions like delete -->
-                        <a href="participants.php?delete_id=<?php echo $participant['id']; ?>" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">Delete</a>
+                        <a href="program.php?delete_id=<?php echo $program['id']; ?>" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">Delete</a>
+
                     </td>
                 </tr>
             <?php endforeach; ?>
