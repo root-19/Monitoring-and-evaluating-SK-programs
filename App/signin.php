@@ -90,7 +90,7 @@ function getRedirectUrl($userType) {
             </form>
             <span class="text-gray-700">
     If you don't have an account, 
-    <a href="register.php" class="text-blue-500 hover:text-blue-700 font-semibold">Register here!</a>
+    <a href="signup.php" class="text-blue-500 hover:text-blue-700 font-semibold">Register here!</a>
 </span>
 
         </div>

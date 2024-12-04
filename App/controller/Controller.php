@@ -81,10 +81,10 @@ class Controller {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
-            return $user['approved']; // Return the 'approved' status
+            return $user['approved']; 
         }
 
-        return null; // Return null if the user is not found
+        return null; 
     }
 }
 ?>

@@ -90,7 +90,7 @@ if (isset($_GET['delete_id'])) {
     <div class="container mx-auto flex items-center justify-between px-4 py-4">
         <!-- Logo and Title -->
         <div class="flex items-center space-x-4">
-            <!-- <img src="../../assets/image/sks.png" alt="Logo" class="w-12 h-13 object-cover rounded"> -->
+            <img src="../../assets/image/sks.png" alt="Logo" class="w-12 h-13 object-cover rounded">
             <h1 class="text-2xl font-bold">Sangguniang Kabataan Dinagat Islands</h1>
         </div>
         

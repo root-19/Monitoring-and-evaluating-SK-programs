@@ -86,6 +86,31 @@ if (isset($_GET['delete_id'])) {
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
+<header class="bg-blue-700 text-white shadow-md">
+    <div class="container mx-auto flex items-center justify-between px-4 py-4">
+        <!-- Logo and Title -->
+        <div class="flex items-center space-x-4">
+            <img src="../../assets/image/sks.png" alt="Logo" class="w-12 h-13 object-cover rounded">
+            <h1 class="text-2xl font-bold">Sangguniang Kabataan Dinagat Islands</h1>
+        </div>
+        
+        <!-- Navigation -->
+        <nav>
+            <ul class="flex space-x-4 text-sm font-medium">
+                <!-- <li><a href="#" class="hover:text-gray-200">Home</a></li>
+                <li><a href="#" class="hover:text-gray-200">Categories</a></li>
+                <li><a href="#" class="hover:text-gray-200">Participants</a></li>
+                <li> -->
+    <!-- <a href="signin.php" 
+       class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+       Login
+    </a> -->
+</li>
+
+            </ul>
+        </nav>
+    </div>
+</header>
 <?php include "../public/adminbar.php"; ?>
 
 

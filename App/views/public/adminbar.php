@@ -46,7 +46,7 @@
     <!-- Sidebar -->
     <div 
       id="sidebar" 
-      class="bg-blue-700 text-white w-74 md:flex flex-col p-8 space-y-8 hidden md:block"
+      class="bg-blue-700 text-white w-84 md:flex flex-col p-8 space-y-8 hidden md:block"
     >
       <!-- Logo Section -->
       <div class="flex items-center space-x-3">
@@ -74,6 +74,9 @@
           </li>
           <li>
             <a href="../admin/reports.php" class="block py-2 px-4 rounded-md hover:bg-blue-500">report</a>
+          </li>
+          <li>
+            <a href="../admin/aproval.php" class="block py-2 px-4 rounded-md hover:bg-blue-500">Aproval</a>
           </li>
           <li>
             <a href="../admin/logout.php" class="block py-2 px-4 rounded-md hover:bg-blue-500">Logout</a>
